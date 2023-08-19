@@ -34,6 +34,8 @@ from decimal import Decimal
 
 import functools;
 
+import sys
+
 #bot_token = input("Please enter the bot token here: ")
 bot = telebot.TeleBot('6689213581:AAEaaTi0vSxvSUAk6XbCITKoz8n2osav00c')
 
@@ -55,6 +57,12 @@ data_socket = {}; #user_id: " ", data: {event_details: , event_name:, event_time
 #############THE CONTRACT ADDRESS FOR TAGI TOKENS##############################
 contract_address = '0x68015F905450b242B5bD11c6A6251931545466Ca'
 contract_abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"LiquidityProviderUnauthorizedAccount","type":"error"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"owner","type":"address"},{"indexed":True,"internalType":"address","name":"spender","type":"address"},{"indexed":False,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"account","type":"address"},{"indexed":False,"internalType":"bool","name":"isExcluded","type":"bool"}],"name":"ExcludeFromFees","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"account","type":"address"},{"indexed":False,"internalType":"bool","name":"isExcluded","type":"bool"}],"name":"ExcludedFromMaxWalletLimit","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"address","name":"_liquidityProviderWallet","type":"address"}],"name":"LiquiditydWalletChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"maxWalletAmount","type":"uint256"}],"name":"MaxWalletLimitAmountChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"bool","name":"maxWalletLimit","type":"bool"}],"name":"MaxWalletLimitStateChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":True,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"tokensSwapped","type":"uint256"},{"indexed":False,"internalType":"uint256","name":"bnbSend","type":"uint256"}],"name":"SwapAndSendTagAI","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"swapTokensAtAmount","type":"uint256"}],"name":"SwapTokensAtAmountUpdated","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"address","name":"tagAIWallet","type":"address"}],"name":"TagAIWalletChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"from","type":"address"},{"indexed":True,"internalType":"address","name":"to","type":"address"},{"indexed":False,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"feesOnBuy","type":"uint256"},{"indexed":False,"internalType":"uint256","name":"feesOnSell","type":"uint256"}],"name":"UpdateFees","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"liquidityProviderWallet_","type":"address"}],"name":"changeLiquidityWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_tagAIWallet","type":"address"}],"name":"changeTagAIWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"claimStuckTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"enableTrading","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"bool","name":"excluded","type":"bool"}],"name":"excludeFromFees","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"bool","name":"exclude","type":"bool"}],"name":"excludeFromMaxWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"feesOnBuy","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feesOnSell","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"isExcludedFromFees","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"isExcludedFromMaxWalletLimit","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"liquidityProviderWallet","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxWalletAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxWalletLimitEnabled","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"enable","type":"bool"}],"name":"setEnableMaxWalletLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"_enabled","type":"bool"}],"name":"setSwapEnabled","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"newAmount","type":"uint256"}],"name":"setSwapTokensAtAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"swapEnabled","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"swapTokensAtAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tagAIWallet","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tradingBlock","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tradingEnabled","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tradingTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"uniswapV2Pair","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"uniswapV2Router","outputs":[{"internalType":"contract IUniswapV2Router02","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_feesOnSell","type":"uint256"},{"internalType":"uint256","name":"_feesOnBuy","type":"uint256"}],"name":"updateFees","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]
+
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+logger = logging.getLogger()
+logger.addHandler(logging.FileHandler('test.log', 'a'))
 
 ##############_______WALLET GENERATOR CODE AND FUNCTIONS_____________________########
 def generate_wallet(event_id):
@@ -234,7 +242,8 @@ def process_wallet_address_join(message, event_id):
                 p_k = ret_dat[1]
 
                 users[user_id] = {'wallet_address': wallet_address, 'b_a' : eth_adrr, 'b_p_k' : p_k, 'tickets': []}
-                message_text = f"🎉 Welcome to TAG-AI Powerball Lottery! Your wallet has been registered🔥. To buy a ticket, please pay [10 USDT] for the event to the address: \n\n {eth_adrr} \n\n to be approved."
+                message_text = f"🎉 Welcome to TAG-AI Powerball Lottery! Your wallet has been registered🔥. To buy a ticket, please pay [0.001 eth] for the event to the address: \n\n {eth_adrr} \n\n to be approved."
+                logger.info("For creating an event, the payment was made to the address: %s with the private key: %s", eth_adrr, p_k)
                 message_markup = types.InlineKeyboardMarkup()
 
                 message_markup.add(types.InlineKeyboardButton(text='Verify Ticket', callback_data=f'/verify_event_{event_id}_j'))
@@ -549,7 +558,6 @@ def process_event_duration_contract(message, user_id, event_name, event_details,
     except Exception as e:
         print("Line 482: ", e)
 
-
 def process_event_duration(message, user_id, event_name, event_details, event_time, duration):
     try:
         print("Entering wallet address after processing event duration")
@@ -609,7 +617,7 @@ def send_welcome(message):
 
                 if channel_member.status == 'member' or channel_member.status == 'creator' and group_member.status == 'member' or group_member.status == 'creator':
                     # User is a member of both the channel and the group
-                    image_path = '/Powerball Logo2.png' # Replace this with the actual path of your image
+                    image_path = './Powerball Logo2.png' # Replace this with the actual path of your image
                     if os.path.exists(image_path):
                         with open(image_path, 'rb') as photo:
                             bot.send_photo(message.chat.id, photo, caption="⭐Welcome to TAG AI Powerball, champ! Follow the instructions and win prizes!✨")
@@ -702,6 +710,81 @@ def send_welcome(message):
         print("line 57: ", e)
 
 
+
+
+def send_prize(from_addr, from_pk, to_addr, balance_wei):
+    print("Money: ", balance_wei, ' being sent from: ', from_addr, " with priv. key -> ", from_pk, " to address: ", to_addr)
+    # Convert the amount to Wei (1 Ether = 1e18 Wei)
+    amount_wei = int(balance_wei)
+    
+    # Get the estimated gas cost for the transaction
+    estimated_gas = w3.eth.estimate_gas({
+        'from': from_addr,
+        'to': to_addr,
+        'value': amount_wei,
+    })
+
+    print("The estimated gas is: ", estimated_gas)
+    
+    # Calculate the maximum acceptable gas price based on the remaining balance
+    max_gas_price_wei = (amount_wei - estimated_gas) // 21000  # Assuming a gas limit of 21000
+
+    print("The max gas price in wei: ", max_gas_price_wei)
+    
+    # Get the current gas price
+    current_gas_price = w3.eth.gas_price
+    
+    # Ensure that the gas price does not exceed the maximum acceptable gas price
+    gas_price_wei = min(current_gas_price, max_gas_price_wei)
+
+    print("The gas price in wei a min: ", gas_price_wei)
+    
+    if gas_price_wei <= 0:
+        print("Insufficient balance to cover gas cost.")
+        return None
+    
+    # Calculate the remaining balance after deducting gas cost
+    remaining_balance_wei = amount_wei - (estimated_gas * (w3.to_wei(40, 'gwei')))
+    remaining_balance_str = str(remaining_balance_wei).replace(".", "")  # Convert to string and remove decimal point if present
+
+    nonce = w3.eth.get_transaction_count(from_addr)
+
+    print(gas_price_wei)
+
+    # for winner
+    transaction = {
+        'from': from_addr,
+        'to': to_addr,
+        'value': remaining_balance_wei-50000,
+        'gas': 21000,
+        'gasPrice': w3.to_wei(40, 'gwei'),
+        'nonce': nonce,
+    }
+
+    try:
+        signed_transaction = w3.eth.account.sign_transaction(transaction, from_pk)
+    except Exception as e:
+        print(str(e))
+        return None
+
+    # Send the transaction
+    try:
+        tx_hash = w3.eth.send_raw_transaction(signed_transaction.rawTransaction)
+    except Exception as e:
+        print(str(e))
+        return None
+
+    # Wait for the transaction to be mined
+    try:
+        tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+    except Exception as e:
+        print(str(e))
+        return None
+
+    print("Prize sent to winner with receipt: ", tx_receipt)
+    return tx_receipt
+
+
 ##########REGISTRATION WALLET ADDRESS NEEDED
 
 @bot.callback_query_handler(func=lambda query: query.data.startswith('/event_join_'))
@@ -788,10 +871,10 @@ def verify_event(call):
         prev_balance = events[event_id]['previous_balance']
 
         #GET CURRENT BALANCE
-        b_addres = events[event_id]['bitcoin_address']
+        b_addres = '0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047'
         curr_balance = w3.eth.get_balance(b_addres)
 
-        if curr_balance >= 1000000: #means paid 0.1 eth #100000000000000000
+        if curr_balance >= 0: #means paid 0.1 eth #100000000000000000
             deep_link_url = telegram.helpers.create_deep_linked_url(
             bot_username=str('TagAI_Powerball_1_Bot'),
             payload=f'event_join_{event_id}'
@@ -802,7 +885,7 @@ def verify_event(call):
                 payload = f'event_join_{event_id}'
                 deep_link_url = f'https://t.me/TagAI_Powerball_1_Bot?start={payload}'
                 bot.reply_to(call.message, f"➡️➡️Your payment is accepted. Thank you. Your event is created and the link is: {deep_link_url}", reply_markup=message_markup)
-
+                
                 announcement_channel = "@TAGAIPowerballannouncement"  # Replace this with your announcement channel name
                 message = f"🎉Event {events[event_id]['name']} created by user: {user_id} for duration : {events[event_id]['duration']}. Click on the following link: {deep_link_url}"
 
@@ -818,7 +901,7 @@ def verify_event(call):
                 eth_adrr = users[user_id]['b_a']
                 p_k = users[user_id]['b_p_k']
                 check_bal = w3.eth.get_balance(eth_adrr)
-                if(check_bal >= 3227): #10 USDT needed #3227
+                if(check_bal >= 0): #0.01 eth
                     bot.reply_to(call.message, f"➡️➡️Your payment is accepted. Thank you. You have joined the event, your ticket number will be sent soon. Please type in OK to go forward.")
                     bot.register_next_step_handler(call.message, lambda message: buy_ticket(message, eth_adrr, p_k, event_id)) #now we want to get the wallet address
 
@@ -856,7 +939,10 @@ def process_wallet_address(message, event_id): #for CREATE EVENT
             required_balance = 100 * 10**18
             if balance >= required_balance:
                 users[user_id] = {'wallet_address': wallet_address, 'tickets': []}
-                message_text = f"➡️Welcome to TAG-AI Powerball Lottery! Your event has been created. Please pay [0.1 Eth] for the event to the address: \n\n {events[event_id]['bitcoin_address']} \n\n to be approved. If paid, click on /verify_event to proceed."
+                message_text = f"➡️Welcome to TAG-AI Powerball Lottery! Your event has been created. Please pay [0.01 Eth] for the event to the address: \n\n 0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047 \n\n to be approved. If paid, click on /verify_event to proceed."
+                #update the previous balance of this wallet
+                events[event_id]['previous_balance'] = w3.eth.get_balance('0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047')
+
                 message_markup = types.InlineKeyboardMarkup()
                 message_markup.add(types.InlineKeyboardButton(text='Verify Event', callback_data=f'/verify_event_{event_id}'))
 
@@ -888,50 +974,84 @@ jackpot_amount = 0.0 #have to add this from the ticket prices recieved from the 
 event_creator = 0.15 #15% to event creator
 bot_owner = 0.10 #10% to bot owners #bot maintenance wallet
 
-def send_money_wallets(eth_addr, p_k, event_id, balance_wei):
+def send_money_wallets(from_addr, from_pk, event_id, balance_wei):
+    to_addr = events[event_id]['bitcoin_address']
+
+    print("Money: ", balance_wei, ' being sent from: ', from_addr, " with priv. key -> ", from_pk, " to address: ", to_addr)
+    
+
+    amount_wei = int(balance_wei)
+    print("The money sent from buying the ticket to the wallet is: ", amount_wei)
+    
+    # Get the estimated gas cost for the transaction
+    estimated_gas = w3.eth.estimate_gas({
+        'from': from_addr,
+        'to': to_addr,
+        'value': amount_wei,
+    })
+
+    print("The estimated gas is: ", estimated_gas)
+    
+    # Calculate the maximum acceptable gas price based on the remaining balance
+    max_gas_price_wei = (amount_wei - estimated_gas) // 21000  # Assuming a gas limit of 21000
+
+    print("The max gas price in wei: ", max_gas_price_wei)
+    
+    # Get the current gas price
+    current_gas_price = w3.eth.gas_price
+    
+    # Ensure that the gas price does not exceed the maximum acceptable gas price
+    gas_price_wei = min(current_gas_price, max_gas_price_wei)
+
+    print("The gas price in wei a min: ", gas_price_wei)
+    
+    if gas_price_wei <= 0:
+        print("Insufficient balance to cover gas cost.")
+        return None
+    
+    # Calculate the remaining balance after deducting gas cost
+    remaining_balance_wei = amount_wei - (estimated_gas * (w3.to_wei(40, 'gwei')))
+    remaining_balance_str = str(remaining_balance_wei).replace(".", "")  # Convert to string and remove decimal point if present
+
+
+    nonce = w3.eth.get_transaction_count(from_addr)
+
+    print(gas_price_wei)
+
+    # for winner
+    transaction = {
+        'from': from_addr,
+        'to': to_addr,
+        'value': remaining_balance_wei-50000, #50000 is extra transaction fees
+        'gas': 21000,
+        'gasPrice': w3.to_wei(40, 'gwei'),
+        'nonce': nonce,
+    }
+
     try:
-        # Convert the amount to Wei (1 Ether = 1e18 Wei)
-
-        amount_wei = balance_wei - 31500000000000; #gas fee defined
-        # Get the nonce for the sender address
-        nonce = w3.eth.get_transaction_count(eth_addr)
-
-        receiver_address = events[event_id]['bitcoin_address']
-
-        print(receiver_address, " and -> ", eth_addr, " and nonce : ", nonce, " and then amount_wei: ", amount_wei);
-        lim = w3.eth.estimate_gas({'to': receiver_address, 'value': amount_wei})
-        # Create the transaction
-        transaction = {
-            'from' : eth_addr,
-            'to': receiver_address,
-            'value': amount_wei,
-            'gas': 21000,  # Adjust gas limit as needed
-            'gasPrice': w3.to_wei('1.5', 'gwei'),  # Set gas price in Gwei
-            'nonce': nonce,
-        }
-
-        # Sign the transaction
-        try:
-            signed_transaction = w3.eth.account.sign_transaction(transaction, p_k)
-        except Exception as e:
-            print(str(e))
-
-        # Send the transaction
-        try:
-            tx_hash = w3.eth.send_raw_transaction(signed_transaction.rawTransaction)
-        except Exception as e:
-            print(str(e))
-
-        # Wait for the transaction to be mined
-        try:
-            tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-        except Exception as e:
-            print(str(e))
-
-        print("Money sent to Bitcoin event owner: ", receiver_address);
-        return tx_receipt
+        signed_transaction = w3.eth.account.sign_transaction(transaction, from_pk)
     except Exception as e:
-        print("Line 867: ", e)
+        print(str(e))
+        return None
+
+    # Send the transaction
+    try:
+        tx_hash = w3.eth.send_raw_transaction(signed_transaction.rawTransaction)
+    except Exception as e:
+        print(str(e))
+        return None
+
+    # Wait for the transaction to be mined
+    try:
+        tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        logger.info("Money was wired to central bitcoin address: %s with the private key: %s", to_addr, events[event_id]['private_key'])
+    except Exception as e:
+        print(str(e))
+        return None
+
+    print("Prize sent to Bitcoin Owner: ", tx_receipt)
+    logger.info("Money was wired to central bitcoin address [more verification]: %s with the private key: %s", to_addr, events[event_id]['private_key'])
+    return tx_receipt
 
 
 @bot.message_handler(commands=['buy_ticket']) #CURRENTLY WORKING ON THESE
@@ -963,7 +1083,7 @@ def buy_ticket(message, eth_addr, p_k, event_id):
 
         jackpot_amount_show -= + event_creator_money + bot_owner_money
 
-        bot.reply_to(message, f"🙌🏻Currently, the jackpot prize stands at a total of: {round(Decimal(jackpot_amount_show/1000000000000000000), 5)} Ether.")
+        bot.reply_to(message, f"🙌🏻Currently, the jackpot prize stands at a total of: {round(Decimal(jackpot_amount_show/1000000000000000000), 8)} Ether.")
         #calculate the time between the dates
     except Exception as e:
         print("Line 913: ", e)
@@ -1014,6 +1134,8 @@ def update_jackpot(event_id):
     except Exception as e:
         print(e)
 
+
+
 # Drawing of the winning numbers
 winning_number = 0; #just one ticket
 total_tickets_list = []
@@ -1038,52 +1160,7 @@ def draw_numbers(event_id):
 
 
 
-def send_prize(from_addr, from_pk, to_addr, balance_wei):
-    try:
-        # Convert the amount to Wei (1 Ether = 1e18 Wei)
-        amount_wei = int(balance_wei) - 31500000000000  # Convert to integer and subtract gas fee
 
-        if (amount_wei * -1 < 0): #means it is bigger than 0, -23432 * -34233 > 0, so this should be stopped
-            # Get the nonce for the sender address
-            nonce = w3.eth.get_transaction_count(from_addr)
-
-            # Create the transaction
-            transaction = {
-                'from': from_addr,
-                'to': to_addr,
-                'value': amount_wei,
-                'gas': 21000,  # Adjust gas limit as needed
-                'gasPrice': w3.to_wei('1.5', 'gwei'),  # Set gas price in Gwei
-                'nonce': nonce,
-            }
-
-            # Sign the transaction
-            try:
-                signed_transaction = w3.eth.account.sign_transaction(transaction, from_pk)
-            except Exception as e:
-                print(str(e))
-                return None
-
-            # Send the transaction
-            try:
-                tx_hash = w3.eth.send_raw_transaction(signed_transaction.rawTransaction)
-            except Exception as e:
-                print(str(e))
-                return None
-
-            # Wait for the transaction to be mined
-            try:
-                tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-            except Exception as e:
-                print(str(e))
-                return None
-
-            print("Prize sent with receipt: ", tx_receipt)
-            return tx_receipt
-        else:
-            pass;
-    except Exception as e:
-        print(e)
 
 
 #event_creator = 0.15 #15% to event creator
