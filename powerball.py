@@ -893,7 +893,7 @@ def verify_event(call):
         b_addres = '0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047'
         curr_balance = w3.eth.get_balance(b_addres)
 
-        if curr_balance - prev_balance >= 100000000000000000 : #means paid 0.1 eth #100000000000000000
+        if curr_balance - prev_balance >= 100000000000 : #means paid 0.1 eth #100000000000000000
             deep_link_url = telegram.helpers.create_deep_linked_url(
             bot_username=str('TagAI_Powerball_1_Bot'),
             payload=f'event_join_{event_id}'
@@ -920,7 +920,7 @@ def verify_event(call):
                 eth_adrr = users[user_id]['b_a']
                 p_k = users[user_id]['b_p_k']
                 check_bal = w3.eth.get_balance(eth_adrr)
-                if(check_bal >= 10000000000000000): #0.01 eth = 10000000000000000
+                if(check_bal >= 100000000000000): #0.01 eth = 10000000000000000
                     bot.reply_to(call.message, f"➡️➡️Your payment is accepted. Thank you. You have joined the event, your ticket number will be sent soon. Please type in OK to go forward.")
                     bot.register_next_step_handler(call.message, lambda message: buy_ticket(message, eth_adrr, p_k, event_id)) #now we want to get the wallet address
 
