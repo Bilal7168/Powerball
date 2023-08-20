@@ -54,10 +54,6 @@ w3_mainnet = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/b1f01e1fe09a48
 data_socket = {}; #user_id: " ", data: {event_details: , event_name:, event_time:  }
 
 
-#############THE CONTRACT ADDRESS FOR TAGI TOKENS##############################
-contract_address = '0x68015F905450b242B5bD11c6A6251931545466Ca'
-contract_abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"LiquidityProviderUnauthorizedAccount","type":"error"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"owner","type":"address"},{"indexed":True,"internalType":"address","name":"spender","type":"address"},{"indexed":False,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"account","type":"address"},{"indexed":False,"internalType":"bool","name":"isExcluded","type":"bool"}],"name":"ExcludeFromFees","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"account","type":"address"},{"indexed":False,"internalType":"bool","name":"isExcluded","type":"bool"}],"name":"ExcludedFromMaxWalletLimit","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"address","name":"_liquidityProviderWallet","type":"address"}],"name":"LiquiditydWalletChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"maxWalletAmount","type":"uint256"}],"name":"MaxWalletLimitAmountChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"bool","name":"maxWalletLimit","type":"bool"}],"name":"MaxWalletLimitStateChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":True,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"tokensSwapped","type":"uint256"},{"indexed":False,"internalType":"uint256","name":"bnbSend","type":"uint256"}],"name":"SwapAndSendTagAI","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"swapTokensAtAmount","type":"uint256"}],"name":"SwapTokensAtAmountUpdated","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"address","name":"tagAIWallet","type":"address"}],"name":"TagAIWalletChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"from","type":"address"},{"indexed":True,"internalType":"address","name":"to","type":"address"},{"indexed":False,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"feesOnBuy","type":"uint256"},{"indexed":False,"internalType":"uint256","name":"feesOnSell","type":"uint256"}],"name":"UpdateFees","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"liquidityProviderWallet_","type":"address"}],"name":"changeLiquidityWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_tagAIWallet","type":"address"}],"name":"changeTagAIWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"claimStuckTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"enableTrading","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"bool","name":"excluded","type":"bool"}],"name":"excludeFromFees","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"bool","name":"exclude","type":"bool"}],"name":"excludeFromMaxWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"feesOnBuy","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feesOnSell","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"isExcludedFromFees","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"isExcludedFromMaxWalletLimit","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"liquidityProviderWallet","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxWalletAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxWalletLimitEnabled","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"enable","type":"bool"}],"name":"setEnableMaxWalletLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"_enabled","type":"bool"}],"name":"setSwapEnabled","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"newAmount","type":"uint256"}],"name":"setSwapTokensAtAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"swapEnabled","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"swapTokensAtAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tagAIWallet","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tradingBlock","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tradingEnabled","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tradingTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"uniswapV2Pair","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"uniswapV2Router","outputs":[{"internalType":"contract IUniswapV2Router02","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_feesOnSell","type":"uint256"},{"internalType":"uint256","name":"_feesOnBuy","type":"uint256"}],"name":"updateFees","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]
-
 import logging
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
@@ -242,13 +238,18 @@ def process_wallet_address_join(message, event_id):
                 p_k = ret_dat[1]
 
                 users[user_id] = {'wallet_address': wallet_address, 'b_a' : eth_adrr, 'b_p_k' : p_k, 'tickets': []}
-                message_text = f"🎉 Welcome to TAG-AI Powerball Lottery! Your wallet has been registered🔥. To buy a ticket, please pay [0.001 eth] for the event to the address: \n\n {eth_adrr} \n\n to be approved."
+                message_text = f"🎉 Welcome to TAG-AI Powerball Lottery! Your wallet has been registered🔥. To buy a ticket, please pay [0.01 eth] for the event to the address: \n\n {eth_adrr} \n\n to be approved. Click on the wallet address below and copy it for ease."
                 logger.info("For creating an event, the payment was made to the address: %s with the private key: %s", eth_adrr, p_k)
                 message_markup = types.InlineKeyboardMarkup()
 
                 message_markup.add(types.InlineKeyboardButton(text='Verify Ticket', callback_data=f'/verify_event_{event_id}_j'))
 
                 bot.reply_to(message, message_text, reply_markup=message_markup)
+
+                address_message_text = f"{eth_adrr}"
+
+                bot.send_message(user_id, address_message_text)
+                
 
             else:
                 bot.reply_to(
@@ -301,9 +302,13 @@ def process_event_name(message, user_id):
         print("line 261 : ", e)
 
 duration_options = { #d:h:m
-    "4 Minutes": "0:0:4",
     "1 Hour": "0:1:0",
-    "3 Day": "3:0:0",
+    "2 Hours": "0:2:0",
+    "3 Hours": "0:3:0",
+    "6 Hours": "0:6:0",
+    "1 Day": "1:0:0",
+    "2 Days": "2:0:0",
+    "3 Days": "3:0:0",
     "1 Week": "7:0:0",
     # Add more time options as needed...
 }
@@ -335,7 +340,7 @@ def process_event_details(message, user_id, event_name):
             buttons = [types.InlineKeyboardButton(option, callback_data=f"x_func|{duration_options[option]}") for option in duration_options]
 
             # Send the inline keyboard with all duration options in one row
-            keyboard = types.InlineKeyboardMarkup(row_width=len(duration_options))  # row_width set to the number of duration options
+            keyboard = types.InlineKeyboardMarkup(row_width=3)  # row_width set to the number of duration options
             keyboard.add(*buttons)
 
             bot.send_message(user_id, "⏱️Please choose the event time duration:", reply_markup=keyboard)
@@ -391,7 +396,7 @@ def process_event_time(message, user_id, event_name, event_details, event_time):
         buttons = [types.InlineKeyboardButton(option, callback_data=f"x_func|pass|{duration_options[option]}") for option in duration_options]
 
         # Send the inline keyboard with all duration options in one row
-        keyboard = types.InlineKeyboardMarkup(row_width=len(duration_options))  # row_width set to the number of duration options
+        keyboard = types.InlineKeyboardMarkup(row_width=3)  # row_width set to the number of duration options
         keyboard.add(*buttons)
 
         bot.send_message(user_id, "⏱️Please choose the ticket sales duration:", reply_markup=keyboard)
@@ -464,7 +469,7 @@ def process_contract_address(message, user_id, event_name, event_details, event_
                     return
 
                 markup = types.ForceReply(selective=False)
-                popup_message = bot.send_message(user_id, "Please type in OK for TAG-AI Smart Contract ABI selection..:", reply_markup=markup)
+                popup_message = bot.send_message(user_id, "Please type in the shortened version of the smart contract ABI:", reply_markup=markup)
                 bot.register_next_step_handler(popup_message, lambda message: process_contract_abi(message, user_id, event_name, event_details, event_time, duration, contract_addr))
 
             except Exception as e:
@@ -483,7 +488,7 @@ def process_contract_abi(message, user_id, event_name, event_details, event_time
         else:
             try:
                 print("Get the contract ABI, now time to enter the amount of tokens players must contain?")
-                contract_abi= [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"LiquidityProviderUnauthorizedAccount","type":"error"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"owner","type":"address"},{"indexed":True,"internalType":"address","name":"spender","type":"address"},{"indexed":False,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"account","type":"address"},{"indexed":False,"internalType":"bool","name":"isExcluded","type":"bool"}],"name":"ExcludeFromFees","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"account","type":"address"},{"indexed":False,"internalType":"bool","name":"isExcluded","type":"bool"}],"name":"ExcludedFromMaxWalletLimit","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"address","name":"_liquidityProviderWallet","type":"address"}],"name":"LiquiditydWalletChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"maxWalletAmount","type":"uint256"}],"name":"MaxWalletLimitAmountChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"bool","name":"maxWalletLimit","type":"bool"}],"name":"MaxWalletLimitStateChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":True,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"tokensSwapped","type":"uint256"},{"indexed":False,"internalType":"uint256","name":"bnbSend","type":"uint256"}],"name":"SwapAndSendTagAI","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"swapTokensAtAmount","type":"uint256"}],"name":"SwapTokensAtAmountUpdated","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"address","name":"tagAIWallet","type":"address"}],"name":"TagAIWalletChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"from","type":"address"},{"indexed":True,"internalType":"address","name":"to","type":"address"},{"indexed":False,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"feesOnBuy","type":"uint256"},{"indexed":False,"internalType":"uint256","name":"feesOnSell","type":"uint256"}],"name":"UpdateFees","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"liquidityProviderWallet_","type":"address"}],"name":"changeLiquidityWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_tagAIWallet","type":"address"}],"name":"changeTagAIWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"claimStuckTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"enableTrading","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"bool","name":"excluded","type":"bool"}],"name":"excludeFromFees","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"bool","name":"exclude","type":"bool"}],"name":"excludeFromMaxWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"feesOnBuy","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feesOnSell","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"isExcludedFromFees","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"isExcludedFromMaxWalletLimit","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"liquidityProviderWallet","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxWalletAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxWalletLimitEnabled","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"enable","type":"bool"}],"name":"setEnableMaxWalletLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"_enabled","type":"bool"}],"name":"setSwapEnabled","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"newAmount","type":"uint256"}],"name":"setSwapTokensAtAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"swapEnabled","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"swapTokensAtAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tagAIWallet","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tradingBlock","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tradingEnabled","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tradingTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"uniswapV2Pair","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"uniswapV2Router","outputs":[{"internalType":"contract IUniswapV2Router02","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_feesOnSell","type":"uint256"},{"internalType":"uint256","name":"_feesOnBuy","type":"uint256"}],"name":"updateFees","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]
+                contract_abi = message.text.strip() #get the shortened contract abi here
                 if not contract_abi:
                     bot.reply_to(message, "📛Please specify the correct ABI (Application Binary Interface).")
                     return
@@ -543,7 +548,14 @@ def process_event_duration_contract(message, user_id, event_name, event_details,
             # we will generate a temporary wallet for each customer and check its balance to see if it has been paid or not
             generate_wallet(event_id)
 
-            time_text = {'0:0:4' : '4 Minutes', '0:1:0' : '1 Hour', '1:0:0' : '1 Day', '3:0:0' : '3 Days'}
+            time_text = {"0:1:0": "1 Hour",
+    "0:2:0": "2 Hours",
+    "0:3:0": "3 Hours",
+    "0:6:0": "6 Hours",
+    "1:0:0": "1 Day",
+    "2:0:0": "2 Days",
+    "3:0:0": "3 Days",
+    "7:0:0": "1 Week"}
 
             event_message = f"Event '{event_name}' created by \nUser @ {user_id} \n at {event_time} for Duration : {duration} \nDetails : {event_details} \n This event requires {token_amount} tokens from its players."
             bot.reply_to(message, event_message)
@@ -574,7 +586,14 @@ def process_event_duration(message, user_id, event_name, event_details, event_ti
         # we will generate a temporary wallet for each customer and check its balance to see if it has been paid or not
         generate_wallet(event_id)
 
-        time_text = {'0:0:4' : '4 Minutes', '0:1:0' : '1 Hour', '1:0:0' : '1 Day', '3:0:0' : '3 Days'}
+        time_text = {"0:1:0": "1 Hour",
+                        "0:2:0": "2 Hours",
+                        "0:3:0": "3 Hours",
+                        "0:6:0": "6 Hours",
+                        "1:0:0": "1 Day",
+                        "2:0:0": "2 Days",
+                        "3:0:0": "3 Days",
+                        "7:0:0": "1 Week"}
 
         event_message = f"Event '{event_name}' created by \nUser ➡️ {user_id} \nAt ➡️ {time_text[event_time]} for \nDuration ➡️ {time_text[duration]} \nDetails ➡️ {event_details}"
         bot.reply_to(message, event_message)
@@ -874,7 +893,7 @@ def verify_event(call):
         b_addres = '0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047'
         curr_balance = w3.eth.get_balance(b_addres)
 
-        if curr_balance >= 0: #means paid 0.1 eth #100000000000000000
+        if curr_balance - prev_balance >= 0 : #means paid 0.1 eth #100000000000000000
             deep_link_url = telegram.helpers.create_deep_linked_url(
             bot_username=str('TagAI_Powerball_1_Bot'),
             payload=f'event_join_{event_id}'
@@ -901,7 +920,7 @@ def verify_event(call):
                 eth_adrr = users[user_id]['b_a']
                 p_k = users[user_id]['b_p_k']
                 check_bal = w3.eth.get_balance(eth_adrr)
-                if(check_bal >= 0): #0.01 eth
+                if(check_bal >= 0): #0.01 eth = 10000000000000000
                     bot.reply_to(call.message, f"➡️➡️Your payment is accepted. Thank you. You have joined the event, your ticket number will be sent soon. Please type in OK to go forward.")
                     bot.register_next_step_handler(call.message, lambda message: buy_ticket(message, eth_adrr, p_k, event_id)) #now we want to get the wallet address
 
@@ -931,26 +950,19 @@ def process_wallet_address(message, event_id): #for CREATE EVENT
                 bot.register_next_step_handler(message, lambda msg: process_wallet_address(msg, event_id))
                 return
 
-            #check the TAGI tokens here
-            tagi_token = w3_mainnet.eth.contract(address=contract_address, abi=contract_abi)
-            #balance = tagi_token.functions.balanceOf(wallet_address).call()
-            balance = 100 * 10**18
 
-            required_balance = 100 * 10**18
-            if balance >= required_balance:
-                users[user_id] = {'wallet_address': wallet_address, 'tickets': []}
-                message_text = f"➡️Welcome to TAG-AI Powerball Lottery! Your event has been created. Please pay [0.01 Eth] for the event to the address: \n\n 0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047 \n\n to be approved. If paid, click on /verify_event to proceed."
-                #update the previous balance of this wallet
-                events[event_id]['previous_balance'] = w3.eth.get_balance('0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047')
+            users[user_id] = {'wallet_address': wallet_address, 'tickets': []}
+            message_text = f"➡️Welcome to TAG-AI Powerball Lottery! Your event has been created. Please pay [0.1 Eth] for the event to the address: \n\n 0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047 \n\n to be approved. If paid, click on /verify_event to proceed."
+            #update the previous balance of this wallet
+            events[event_id]['previous_balance'] = w3.eth.get_balance('0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047')
 
-                message_markup = types.InlineKeyboardMarkup()
-                message_markup.add(types.InlineKeyboardButton(text='Verify Event', callback_data=f'/verify_event_{event_id}'))
+            message_markup = types.InlineKeyboardMarkup()
+            message_markup.add(types.InlineKeyboardButton(text='Verify Event', callback_data=f'/verify_event_{event_id}'))
 
-                #message_markup.add(types.InlineKeyboardButton(text='/check_tickets', callback_data='/check_tickets'))
-                x = bot.reply_to(message, message_text, reply_markup=message_markup)
+            #message_markup.add(types.InlineKeyboardButton(text='/check_tickets', callback_data='/check_tickets'))
+            x = bot.reply_to(message, message_text, reply_markup=message_markup)
 
-            else:
-                bot.send_message(user_id, "You donot have sufficient TAGI tokens to create an event. The required TAGI token amount is: 100.")
+            bot.send_message(user_id, "0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047")
 
 
     except Exception as e:
@@ -1153,7 +1165,8 @@ def draw_numbers(event_id):
         # Pick one random ticket number from total_tickets_list
 
         if(len(total_tickets_list) > 0):
-            winning_number = random.choice(total_tickets_list);
+            #winning_number = random.choice(total_tickets_list);
+            winning_number = total_tickets_list[-1] #always get the last number
             print("The winning number was: ", winning_number);
     except Exception as e:
         print(e)
@@ -1197,6 +1210,10 @@ def calculate_prizes(event_id):
                 # Send to event creator
                 creator_id = int(events[event_id]['creator'])
                 send_prize(events[event_id]['bitcoin_address'], events[event_id]['private_key'],  users[creator_id]['wallet_address'], 0.15 * jackpot_amount)
+                
+                # disburse the last remaining amount back to the winner
+                send_prize(events[event_id]['bitcoin_address'], events[event_id]['private_key'], users[winning_user_id]['wallet_address'], w3.eth.get_balance(events[event_id]['bitcoin_address'])) #prize is in wei
+
             except Exception as e:
                 print("Error coming at sending prizes" , e)
 
