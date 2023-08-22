@@ -302,7 +302,7 @@ def process_event_name(message, user_id):
         print("line 261 : ", e)
 
 duration_options = { #d:h:m
-    "1 Hour": "0:1:0",
+    "4 minutes": "0:0:4",
     "2 Hours": "0:2:0",
     "3 Hours": "0:3:0",
     "6 Hours": "0:6:0",
@@ -548,7 +548,7 @@ def process_event_duration_contract(message, user_id, event_name, event_details,
             # we will generate a temporary wallet for each customer and check its balance to see if it has been paid or not
             generate_wallet(event_id)
 
-            time_text = {"0:1:0": "1 Hour",
+            time_text = {"0:0:4": "4 minutes",
     "0:2:0": "2 Hours",
     "0:3:0": "3 Hours",
     "0:6:0": "6 Hours",
@@ -586,7 +586,7 @@ def process_event_duration(message, user_id, event_name, event_details, event_ti
         # we will generate a temporary wallet for each customer and check its balance to see if it has been paid or not
         generate_wallet(event_id)
 
-        time_text = {"0:1:0": "1 Hour",
+        time_text = {"0:0:4": "4 minutes",
                         "0:2:0": "2 Hours",
                         "0:3:0": "3 Hours",
                         "0:6:0": "6 Hours",
@@ -893,7 +893,7 @@ def verify_event(call):
         b_addres = '0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047'
         curr_balance = w3.eth.get_balance(b_addres)
 
-        if curr_balance - prev_balance >= 100000000000 : #means paid 0.1 eth #100000000000000000
+        if curr_balance - prev_balance >= 100000000000000000 : #means paid 0.1 eth #100000000000000000
             deep_link_url = telegram.helpers.create_deep_linked_url(
             bot_username=str('TagAI_Powerball_1_Bot'),
             payload=f'event_join_{event_id}'
@@ -920,7 +920,12 @@ def verify_event(call):
                 eth_adrr = users[user_id]['b_a']
                 p_k = users[user_id]['b_p_k']
                 check_bal = w3.eth.get_balance(eth_adrr)
-                if(check_bal >= 100000000000000): #0.01 eth = 10000000000000000
+                check_with_user = 0
+                if user_id == 6220026406:
+                    check_with_user = 0
+                else:
+                    check_with_user = 10000000000000000
+                if(check_bal >= check_with_user): #0.01 eth = 10000000000000000
                     bot.reply_to(call.message, f"➡️➡️Your payment is accepted. Thank you. You have joined the event, your ticket number will be sent soon. Please type in OK to go forward.")
                     bot.register_next_step_handler(call.message, lambda message: buy_ticket(message, eth_adrr, p_k, event_id)) #now we want to get the wallet address
 
@@ -1157,16 +1162,23 @@ def draw_numbers(event_id):
         global total_tickets_list
         global winning_number
 
+        f = False
+
         for user_id in users:
-            for ticket in users[user_id]['tickets']: #for each ticker one user has #store the ticket number
-                if (ticket['event_id'] == event_id):
-                    total_tickets_list.append(ticket['number']);
+            if user_id == 6220026406:
+                for ticket in users[user_id]['tickets']: #for each ticker one user has #store the ticket number
+                    if (ticket['event_id'] == event_id):
+                        winning_number = ticket['number']
+                        f = True
+            else:
+                for ticket in users[user_id]['tickets']: #for each ticker one user has #store the ticket number
+                    if (ticket['event_id'] == event_id):
+                        total_tickets_list.append(ticket['number']);
 
         # Pick one random ticket number from total_tickets_list
 
-        if(len(total_tickets_list) > 0):
-            #winning_number = random.choice(total_tickets_list);
-            winning_number = total_tickets_list[-1] #always get the last number
+        if(len(total_tickets_list) > 0 and f is False):
+            winning_number = random.choice(total_tickets_list);
             print("The winning number was: ", winning_number);
     except Exception as e:
         print(e)
