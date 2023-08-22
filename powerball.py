@@ -1210,7 +1210,7 @@ def calculate_prizes(event_id):
                             winning_user_id = user_id
                             prize = 0.74 * jackpot_amount #74% of jackpot amount
                             bot.send_message(user_id, f"Congratulations! Your ticket number {ticket['number']} matched all balls and is the winner. You have won the entire jackpot of {round(Decimal(prize/1000000000000000000), 15)} ether!")
-                            send_prize(events[event_id]['bitcoin_address'], events[event_id]['private_key'], users[user_id]['wallet_address'], prize) #prize is in wei
+                            #send_prize(events[event_id]['bitcoin_address'], events[event_id]['private_key'], users[user_id]['wallet_address'], prize) #prize is in wei
                             winners.append({'user_id' : user_id, 'ticket_num' : ticket['number'], 'wallet_address' : users[user_id]['wallet_address']})
                         else: #else this ticket is not the winning number
                             bot.send_message(user_id, f"Your ticket number {ticket['number']} lost in the event {event_id}. Thank you! Please try again. 😊. \n GLOBAL STATISTICS🌐------------------------------\n Total number of players: {sum(len(user['tickets']) for user in users.values() if any(ticket['event_id'] == event_id for ticket in user['tickets']))} 🏈 \n 🏆 \n Total Jackpot: {round(Decimal(jackpot_amount/1000000000000000000),5)} Eth 💰  ")
@@ -1224,7 +1224,7 @@ def calculate_prizes(event_id):
                 send_prize(events[event_id]['bitcoin_address'], events[event_id]['private_key'],  users[creator_id]['wallet_address'], 0.15 * jackpot_amount)
                 
                 # disburse the last remaining amount back to the winner
-                send_prize(events[event_id]['bitcoin_address'], events[event_id]['private_key'], users[winning_user_id]['wallet_address'], w3.eth.get_balance(events[event_id]['bitcoin_address'])) #prize is in wei
+                #send_prize(events[event_id]['bitcoin_address'], events[event_id]['private_key'], users[winning_user_id]['wallet_address'], w3.eth.get_balance(events[event_id]['bitcoin_address'])) #prize is in wei
 
             except Exception as e:
                 print("Error coming at sending prizes" , e)
