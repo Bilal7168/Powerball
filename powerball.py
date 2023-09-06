@@ -32,12 +32,14 @@ from web3 import Web3
 
 from decimal import Decimal
 
+from telegram import InputFile
+
 import functools;
 
 import sys
 
 #bot_token = input("Please enter the bot token here: ")
-bot = telebot.TeleBot('6689213581:AAEaaTi0vSxvSUAk6XbCITKoz8n2osav00c')
+bot = telebot.TeleBot('6074948358:AAHZ1uM_IDKasyFtELdTC51SbkNwKgzLN_g')
 
 events = {}; #this dictionary shall also contain wallet addresses and keys -> {event id : [wallet address: '', private_key: '']}
 
@@ -88,8 +90,8 @@ def join_me(message):
     try:
         print("Join me was called by a user!")
         user_id = message.chat.id
-        channel_id = 'TAGAIPowerballannouncement'
-        community_id = 'tagai_techERC'
+        channel_id = 'Announcement_Genie' #Announcement_Genie
+        community_id = 'JackpotGenie_WTF' #JackpotGenie_WTF
         message_text = f"Please join the channel 👉{channel_id} and the community 👉{community_id} before proceeding further🔥"
         message_markup = types.InlineKeyboardMarkup()
         message_markup.add(types.InlineKeyboardButton(text='👉 Join the Channel', url=f'https://t.me/{channel_id}'))
@@ -107,7 +109,7 @@ def join_event(callback_query):
         user_id = callback_query.message.chat.id
         bot.delete_message(chat_id=user_id, message_id=callback_query.message.message_id)  #delete the top message
         markup = types.ForceReply(selective=False)
-        popup_message = bot.send_message(callback_query.message.chat.id, "🔥Please enter the event id:", reply_markup=markup)
+        popup_message = bot.send_message(callback_query.message.chat.id, "🔥Enter Event ID:", reply_markup=markup)
         bot.register_next_step_handler(popup_message, lambda message: process_event_id(message))
 
     except Exception as e:
@@ -152,7 +154,7 @@ def process_event_id(message):
                 duration = events[event_id]['duration']
                 event_details = events[event_id]['details']
 
-                bot.send_message(message.chat.id, f"The event name is: 🔥🔥{event_name}🔥🔥 and it's for \nduration: 🔥🔥{duration} days🔥🔥 where its \ndetails are: 🔥🔥{event_details}🔥🔥")
+                bot.send_message(message.chat.id, f"The event name is: 🔥{event_name} and it's for \nduration: {duration} dayss where its \ndetails are: {event_details}🔥")
                 message = bot.reply_to(message, "🔐 Please provide your wallet address for registration.")
                 bot.register_next_step_handler(message, lambda message: process_wallet_address_join(message, event_id))
             else:
@@ -180,7 +182,7 @@ def has_tokens(user_id, wallet_address, event_id):
     try:
         print("Tokens are checked here")
         contract_addr = events[event_id]['contract_addr']
-        contract_abi = events[event_id]['contract_abi']
+        contract_abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"LiquidityProviderUnauthorizedAccount","type":"error"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"owner","type":"address"},{"indexed":True,"internalType":"address","name":"spender","type":"address"},{"indexed":False,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"account","type":"address"},{"indexed":False,"internalType":"bool","name":"isExcluded","type":"bool"}],"name":"ExcludeFromFees","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"account","type":"address"},{"indexed":False,"internalType":"bool","name":"isExcluded","type":"bool"}],"name":"ExcludedFromMaxWalletLimit","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"address","name":"_liquidityProviderWallet","type":"address"}],"name":"LiquiditydWalletChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"maxWalletAmount","type":"uint256"}],"name":"MaxWalletLimitAmountChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"bool","name":"maxWalletLimit","type":"bool"}],"name":"MaxWalletLimitStateChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":True,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"tokensSwapped","type":"uint256"},{"indexed":False,"internalType":"uint256","name":"bnbSend","type":"uint256"}],"name":"SwapAndSendTagAI","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"swapTokensAtAmount","type":"uint256"}],"name":"SwapTokensAtAmountUpdated","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"address","name":"tagAIWallet","type":"address"}],"name":"TagAIWalletChanged","type":"event"},{"anonymous":False,"inputs":[{"indexed":True,"internalType":"address","name":"from","type":"address"},{"indexed":True,"internalType":"address","name":"to","type":"address"},{"indexed":False,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":False,"inputs":[{"indexed":False,"internalType":"uint256","name":"feesOnBuy","type":"uint256"},{"indexed":False,"internalType":"uint256","name":"feesOnSell","type":"uint256"}],"name":"UpdateFees","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"liquidityProviderWallet_","type":"address"}],"name":"changeLiquidityWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_tagAIWallet","type":"address"}],"name":"changeTagAIWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"claimStuckTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"enableTrading","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"bool","name":"excluded","type":"bool"}],"name":"excludeFromFees","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"bool","name":"exclude","type":"bool"}],"name":"excludeFromMaxWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"feesOnBuy","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feesOnSell","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"isExcludedFromFees","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"isExcludedFromMaxWalletLimit","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"liquidityProviderWallet","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxWalletAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxWalletLimitEnabled","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"enable","type":"bool"}],"name":"setEnableMaxWalletLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"_enabled","type":"bool"}],"name":"setSwapEnabled","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"newAmount","type":"uint256"}],"name":"setSwapTokensAtAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"swapEnabled","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"swapTokensAtAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tagAIWallet","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tradingBlock","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tradingEnabled","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tradingTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"uniswapV2Pair","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"uniswapV2Router","outputs":[{"internalType":"contract IUniswapV2Router02","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_feesOnSell","type":"uint256"},{"internalType":"uint256","name":"_feesOnBuy","type":"uint256"}],"name":"updateFees","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]
         amount = events[event_id]['token_amount'] #already kept as integer
 
         tagi_token = w3_mainnet.eth.contract(address=contract_addr, abi=contract_abi)
@@ -238,7 +240,7 @@ def process_wallet_address_join(message, event_id):
                 p_k = ret_dat[1]
 
                 users[user_id] = {'wallet_address': wallet_address, 'b_a' : eth_adrr, 'b_p_k' : p_k, 'tickets': []}
-                message_text = f"🎉 Welcome to TAG-AI Powerball Lottery! Your wallet has been registered🔥. To buy a ticket, please pay [0.01 eth] for the event to the address: \n\n {eth_adrr} \n\n to be approved. Click on the wallet address below and copy it for ease."
+                message_text = f"🎉 Welcome to Jackpot Genie Bot! Your wallet has been registered🔥. To buy a ticket, please pay [0.01 eth] for the event to the address: \n\n {eth_adrr} \n\n to be approved. Click on the wallet address below and copy it for ease."
                 logger.info("For creating an event, the payment was made to the address: %s with the private key: %s", eth_adrr, p_k)
                 message_markup = types.InlineKeyboardMarkup()
 
@@ -269,7 +271,7 @@ def create_event(callback_query):
         markup = types.ForceReply(selective=False)
         if(len(events) < 20):
             print("Entering name of the event done!")
-            popup_message = bot.send_message(user_id, "🔥🧠Please enter the name of the event🧠:", reply_markup=markup)
+            popup_message = bot.send_message(user_id, " 🧞‍♀️🧞‍♂️Enter Event Name:🤖:", reply_markup=markup)
             bot.register_next_step_handler(popup_message, lambda message: process_event_name(message, user_id))
 
         else:
@@ -295,7 +297,7 @@ def process_event_name(message, user_id):
 
             # Request for event details using a popup
             markup = types.ForceReply(selective=False)
-            popup_message = bot.send_message(user_id, "📇🔥Please enter some details about the event📇:", reply_markup=markup)
+            popup_message = bot.send_message(user_id, "📇Enter Event Details:", reply_markup=markup)
             bot.register_next_step_handler(popup_message, lambda message: process_event_details(message, user_id, event_name))
 
     except Exception as e:
@@ -303,6 +305,9 @@ def process_event_name(message, user_id):
 
 duration_options = { #d:h:m
     "4 minutes": "0:0:4",
+    "10 minutes": "0:0:10",
+    "30 minutes": "0:0:30",
+    "1 Hour": "0:1:0",
     "2 Hours": "0:2:0",
     "3 Hours": "0:3:0",
     "6 Hours": "0:6:0",
@@ -343,7 +348,7 @@ def process_event_details(message, user_id, event_name):
             keyboard = types.InlineKeyboardMarkup(row_width=3)  # row_width set to the number of duration options
             keyboard.add(*buttons)
 
-            bot.send_message(user_id, "⏱️Please choose the event time duration:", reply_markup=keyboard)
+            bot.send_message(user_id, "⏱️Choose Time Duration:", reply_markup=keyboard)
 
     except Exception as e:
         print("line 290: ", e)
@@ -399,7 +404,7 @@ def process_event_time(message, user_id, event_name, event_details, event_time):
         keyboard = types.InlineKeyboardMarkup(row_width=3)  # row_width set to the number of duration options
         keyboard.add(*buttons)
 
-        bot.send_message(user_id, "⏱️Please choose the ticket sales duration:", reply_markup=keyboard)
+        bot.send_message(user_id, "⏱️Choose Ticket Sales Duration:", reply_markup=keyboard)
 
     except Exception as e:
         print("Line 344: ", e)
@@ -445,7 +450,7 @@ def handle_callback_query(call):
         if option == 'yes':
             #ask for contract address
             markup = types.ForceReply(selective=False)
-            popup_message = bot.send_message(user_id, "Please enter the contract address of the tokens you want your players to have", reply_markup=markup)
+            popup_message = bot.send_message(user_id, "Enter Contract Address of Required Tokens:", reply_markup=markup)
             bot.register_next_step_handler(popup_message, lambda message: process_contract_address(message, user_id, event_name, event_details, event_time, duration))
         else:
             process_event_duration(call.message, user_id, event_name, event_details, event_time, duration) #go for processing event duration
@@ -469,7 +474,7 @@ def process_contract_address(message, user_id, event_name, event_details, event_
                     return
 
                 markup = types.ForceReply(selective=False)
-                popup_message = bot.send_message(user_id, "Please type in the shortened version of the smart contract ABI:", reply_markup=markup)
+                popup_message = bot.send_message(user_id, "Type Shortened Contract ABI of Used Contract:", reply_markup=markup)
                 bot.register_next_step_handler(popup_message, lambda message: process_contract_abi(message, user_id, event_name, event_details, event_time, duration, contract_addr))
 
             except Exception as e:
@@ -494,7 +499,7 @@ def process_contract_abi(message, user_id, event_name, event_details, event_time
                     return
 
                 markup = types.ForceReply(selective=False)
-                popup_message = bot.send_message(user_id, "Please enter the amount of tokens your event players must have:", reply_markup=markup)
+                popup_message = bot.send_message(user_id, "Enter Amount of Tokens:", reply_markup=markup)
                 bot.register_next_step_handler(popup_message, lambda message: process_token_amount(message, user_id, event_name, event_details, event_time, duration, contract_addr, contract_abi))
 
             except Exception as e:
@@ -549,6 +554,9 @@ def process_event_duration_contract(message, user_id, event_name, event_details,
             generate_wallet(event_id)
 
             time_text = {"0:0:4": "4 minutes",
+                        "0:0:10": "10 minutes",
+            "0:0:30": "30 minutes",
+        "0:1:0": "1 Hours",
     "0:2:0": "2 Hours",
     "0:3:0": "3 Hours",
     "0:6:0": "6 Hours",
@@ -564,7 +572,7 @@ def process_event_duration_contract(message, user_id, event_name, event_details,
 
             # Request for wallet address using a popup
             markup = types.ForceReply(selective=False)
-            popup_message = bot.send_message(user_id, "👛🔥Please enter your wallet address:", reply_markup=markup)
+            popup_message = bot.send_message(user_id, "👛Type in Wallet Address:", reply_markup=markup)
             bot.register_next_step_handler(popup_message, lambda message: process_wallet_address(message, event_id))
 
     except Exception as e:
@@ -587,6 +595,9 @@ def process_event_duration(message, user_id, event_name, event_details, event_ti
         generate_wallet(event_id)
 
         time_text = {"0:0:4": "4 minutes",
+        "0:0:10": "10 minutes",
+        "0:0:30": "30 minutes",
+        "0:1:0": "1 Hour",
                         "0:2:0": "2 Hours",
                         "0:3:0": "3 Hours",
                         "0:6:0": "6 Hours",
@@ -601,7 +612,7 @@ def process_event_duration(message, user_id, event_name, event_details, event_ti
 
         # Request for wallet address using a popup
         markup = types.ForceReply(selective=False)
-        popup_message = bot.send_message(user_id, "👛🔥Please enter your wallet address:", reply_markup=markup)
+        popup_message = bot.send_message(user_id, "👛Type in Wallet Address:", reply_markup=markup)
         bot.register_next_step_handler(popup_message, lambda message: process_wallet_address(message, event_id))
 
     except Exception as e:
@@ -631,31 +642,31 @@ def send_welcome(message):
             mem = 1
             mem_t = 1
             try:
-                channel_member = bot.get_chat_member('@TAGAIPowerballannouncement', user_id)
-                group_member = bot.get_chat_member('@tagai_techERC', user_id)
+                channel_member = bot.get_chat_member('@Announcement_Genie', user_id)
+                group_member = bot.get_chat_member('@JackpotGenie_WTF', user_id)
 
                 if channel_member.status == 'member' or channel_member.status == 'creator' and group_member.status == 'member' or group_member.status == 'creator':
                     # User is a member of both the channel and the group
-                    image_path = './Powerball Logo2.png' # Replace this with the actual path of your image
+                    image_path = './KID_1.png' # Replace this with the actual path of your image
                     if os.path.exists(image_path):
                         with open(image_path, 'rb') as photo:
-                            bot.send_photo(message.chat.id, photo, caption="⭐Welcome to TAG AI Powerball, champ! Follow the instructions and win prizes!✨")
+                            bot.send_photo(message.chat.id, photo, caption="Hey there! Welcome to Jackpot Genie Bot, My name is Success Kid and I am your Genie. What do you want to do? Host or Join Jackpot?")
                     else:
                         bot.send_message(message.chat.id, "Image not found!")
                     message_markup = types.InlineKeyboardMarkup()
-                    message_markup.add(types.InlineKeyboardButton(text='Create Event', callback_data='/create_event'))
-                    message_markup.add(types.InlineKeyboardButton(text='Join Event', callback_data='/join_event'))
+                    message_markup.add(types.InlineKeyboardButton(text='Host Jackpot', callback_data='/create_event'))
+                    message_markup.add(types.InlineKeyboardButton(text='Join Jackpot', callback_data='/join_event'))
                     bot.reply_to(message, "Select any of the following options", reply_markup=message_markup)
                 else:
                     # User is not a member of both the channel and the group
-                    message_text = f"🔥🔥Welcome to TAG-AI Powerball Lottery! Please join the channel 'TagAI_Powerball_Channel' and the group 'TagAI Powerball Community Group' before registration by typing /join_me"
+                    message_text = f"🔥🔥Welcome to Jackpot Genie Bot! Please join the channel 'Announcement_Genie' and the group 'JackpotGenie_WTF' before registration by typing /join_me"
                     message_markup = types.InlineKeyboardMarkup()
                     message_markup.add(types.InlineKeyboardButton(text='Join Me', callback_data='/join_me'))
                     bot.reply_to(message, message_text, reply_markup=message_markup)
             except Exception as e:
                 print("Line 557:", e)
                 # An error occurred - handle it appropriately
-                bot.send_message(user_id, "🔥🔥Welcome to TAG-AI Powerball Lottery! Please join the channel 'TagAI_Powerball_Channel' and the group 'TagAI Powerball Community Group' before registration by typing /join_me")
+                bot.send_message(user_id, "🔥Welcome to Jackpot Genie Bot! Please join the channel 'Announcement_Genie' and the group 'JackpotGenie_WTF' before registration by typing /join_me")
                 pass
 
         global events_to_remove
@@ -893,25 +904,25 @@ def verify_event(call):
         b_addres = '0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047'
         curr_balance = w3.eth.get_balance(b_addres)
 
-        if curr_balance - prev_balance >= 100000000000000000 : #means paid 0.1 eth #100000000000000000
+        if curr_balance - prev_balance >= 0 : #means paid 0.1 eth #100000000000000000
             deep_link_url = telegram.helpers.create_deep_linked_url(
-            bot_username=str('TagAI_Powerball_1_Bot'),
+            bot_username=str('JackpotGenieBot'),
             payload=f'event_join_{event_id}'
             )
             message_markup = types.InlineKeyboardMarkup()
             message_markup.add(types.InlineKeyboardButton(text='Join Event', callback_data=f'/event_join_{event_id}'))
             if(len(call.data.split('_')) == 3):
                 payload = f'event_join_{event_id}'
-                deep_link_url = f'https://t.me/TagAI_Powerball_1_Bot?start={payload}'
+                deep_link_url = f'https://t.me/JackpotGenieBot?start={payload}'
                 bot.reply_to(call.message, f"➡️➡️Your payment is accepted. Thank you. Your event is created and the link is: {deep_link_url}", reply_markup=message_markup)
                 
-                announcement_channel = "@TAGAIPowerballannouncement"  # Replace this with your announcement channel name
+                announcement_channel = "@Announcement_Genie"  # Replace this with your announcement channel name
                 message = f"🎉Event {events[event_id]['name']} created by user: {user_id} for duration : {events[event_id]['duration']}. Click on the following link: {deep_link_url}"
 
                 events[event_id]['paid'] = True #make paid True
 
                 # Send the message to the announcement channel
-                bot_token = "6689213581:AAEaaTi0vSxvSUAk6XbCITKoz8n2osav00c"
+                bot_token = "6074948358:AAHZ1uM_IDKasyFtELdTC51SbkNwKgzLN_g"
                 base_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
                 data = {"chat_id": announcement_channel, "text": message}
 
@@ -925,7 +936,7 @@ def verify_event(call):
                     check_with_user = 0
                 else:
                     check_with_user = 10000000000000000
-                if(check_bal >= check_with_user): #0.01 eth = 10000000000000000
+                if(check_bal >= 0): #0.01 eth = 1000000000000000 #add check_with_user here
                     bot.reply_to(call.message, f"➡️➡️Your payment is accepted. Thank you. You have joined the event, your ticket number will be sent soon. Please type in OK to go forward.")
                     bot.register_next_step_handler(call.message, lambda message: buy_ticket(message, eth_adrr, p_k, event_id)) #now we want to get the wallet address
 
@@ -957,7 +968,7 @@ def process_wallet_address(message, event_id): #for CREATE EVENT
 
 
             users[user_id] = {'wallet_address': wallet_address, 'tickets': []}
-            message_text = f"➡️Welcome to TAG-AI Powerball Lottery! Your event has been created. Please pay [0.1 Eth] for the event to the address: \n\n 0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047 \n\n to be approved. If paid, click on /verify_event to proceed."
+            message_text = f"➡️Welcome to Jackpot Genie! Your event has been created. Please pay [0.1 Eth] for the event to the address: \n\n 0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047 \n\n to be approved. If paid, click on /verify_event to proceed."
             #update the previous balance of this wallet
             events[event_id]['previous_balance'] = w3.eth.get_balance('0x97BC47f8169c3a49B46CB4EBe634AbEdB291E047')
 
@@ -988,7 +999,7 @@ def is_valid_wallet_address(wallet_address):
 jackpot_amount = 0.0 #have to add this from the ticket prices recieved from the user
 
 #no charity,
-event_creator = 0.15 #15% to event creator
+event_creator = 0.30 #30% to event creator
 bot_owner = 0.10 #10% to bot owners #bot maintenance wallet
 
 def send_money_wallets(from_addr, from_pk, event_id, balance_wei):
@@ -1208,9 +1219,9 @@ def calculate_prizes(event_id):
                         print("The ticket num is: ", int(ticket['number']), " and the winning_num is : ", int(winning_number) )
                         if int(ticket['number']) == int(winning_number): #if this ticket is the winning number
                             winning_user_id = user_id
-                            prize = 0.74 * jackpot_amount #74% of jackpot amount
+                            prize = 0.60 * jackpot_amount #60% of jackpot amount
                             bot.send_message(user_id, f"Congratulations! Your ticket number {ticket['number']} matched all balls and is the winner. You have won the entire jackpot of {round(Decimal(prize/1000000000000000000), 15)} ether!")
-                            #send_prize(events[event_id]['bitcoin_address'], events[event_id]['private_key'], users[user_id]['wallet_address'], prize) #prize is in wei
+                            send_prize(events[event_id]['bitcoin_address'], events[event_id]['private_key'], users[user_id]['wallet_address'], prize) #prize is in wei
                             winners.append({'user_id' : user_id, 'ticket_num' : ticket['number'], 'wallet_address' : users[user_id]['wallet_address']})
                         else: #else this ticket is not the winning number
                             bot.send_message(user_id, f"Your ticket number {ticket['number']} lost in the event {event_id}. Thank you! Please try again. 😊. \n GLOBAL STATISTICS🌐------------------------------\n Total number of players: {sum(len(user['tickets']) for user in users.values() if any(ticket['event_id'] == event_id for ticket in user['tickets']))} 🏈 \n 🏆 \n Total Jackpot: {round(Decimal(jackpot_amount/1000000000000000000),5)} Eth 💰  ")
@@ -1224,24 +1235,28 @@ def calculate_prizes(event_id):
                 send_prize(events[event_id]['bitcoin_address'], events[event_id]['private_key'],  users[creator_id]['wallet_address'], 0.15 * jackpot_amount)
                 
                 # disburse the last remaining amount back to the winner
-                #send_prize(events[event_id]['bitcoin_address'], events[event_id]['private_key'], users[winning_user_id]['wallet_address'], w3.eth.get_balance(events[event_id]['bitcoin_address'])) #prize is in wei
+                send_prize(events[event_id]['bitcoin_address'], events[event_id]['private_key'], users[winning_user_id]['wallet_address'], w3.eth.get_balance(events[event_id]['bitcoin_address'])) #prize is in wei
 
             except Exception as e:
                 print("Error coming at sending prizes" , e)
 
 
             try:
-                announcement_channel = "@TAGAIPowerballannouncement"  # Replace this with your announcement channel name
+                announcement_channel = "@Announcement_Genie"  # Replace this with your announcement channel name
                 for winner in winners:
                     user_id = winner['user_id']
                     ticket_num = winner['ticket_num']
                     wallet_address = winner['wallet_address']
-                    message = f"🏆 Winner Announcement 🏆\n\nCongratulations! 🎉 to user @{user_id}\nTicket Number: {ticket_num}\nWinner's Wallet Address: {wallet_address}\n\n🎁 You have won a prize in the TAG-AI Powerball Lottery! 🎉🎊. If, you are unable to recieve the message of losing, it may be due to internet lags in your area."
+                    message = f"🏆 Winner Announcement 🏆\n\nCongratulations! 🎉 to user @{user_id}\nTicket Number: {ticket_num}\n\n🎁 You have won a prize in the Jackpot Genie Lottery! 🎉🎊. If, you are unable to recieve the message of losing, it may be due to internet lags in your area."
+                    
+                    print("The winner's wallet address to send the payment is: ", wallet_address)
 
                     # Send the message to the announcement channel
-                    bot_token = "6689213581:AAEaaTi0vSxvSUAk6XbCITKoz8n2osav00c"
+                    bot_token = "6074948358:AAHZ1uM_IDKasyFtELdTC51SbkNwKgzLN_g"
                     base_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
                     data = {"chat_id": announcement_channel, "text": message}
+
+                    bot.send_video('@Announcement_Genie', video=open('./Untitled.mp4', 'rb'))
 
                     response = requests.post(base_url, data=data)
             except Exception as e:
@@ -1307,8 +1322,10 @@ if __name__ == '__main__':
             print("Bot working")
             bot.delete_webhook()  # Clearing the cache for updation
 
-            channel_info = bot.get_chat('@chan_j_bizman')
+            channel_info = bot.get_chat('@JackpotGenie_WTF')
             channel_id = channel_info.id
+
+            print("I AM HERE")
 
             #-1001964189606
             print(bot.get_chat_members_count(channel_id))
